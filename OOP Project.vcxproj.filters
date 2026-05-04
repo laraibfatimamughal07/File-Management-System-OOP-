@@ -16,6 +16,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{4cbc474a-33d6-42fd-953d-bd9258442953}</UniqueIdentifier>
     </Filter>
+    <Filter Include="root">
+      <UniqueIdentifier>{fe48a408-ee9c-4937-9f8b-8bf2e630aea0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Node.h">
@@ -41,5 +44,10 @@
     <ClCompile Include="CommandManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="temp.txt">
+      <Filter>root</Filter>
+    </Text>
   </ItemGroup>
 </Project>
