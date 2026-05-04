@@ -1,5 +1,7 @@
 #include<iostream>
-#include"Folder.h"
+#include"src/Folder.h"
+#include"src/CommandManager.h"
+#include"src/Node.h"
 
 using namespace std;
 

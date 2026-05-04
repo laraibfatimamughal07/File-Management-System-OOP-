@@ -19,18 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CommandManager.h" />
-    <ClInclude Include="Folder.h" />
-    <ClInclude Include="Node.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CommandManager.cpp" />
-    <ClCompile Include="Folder.cpp" />
-    <ClCompile Include="Node.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\CommandManager.cpp" />
+    <ClCompile Include="src\Folder.cpp" />
+    <ClCompile Include="src\Node.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="temp.txt" />
+    <ClInclude Include="src\CommandManager.h" />
+    <ClInclude Include="src\Folder.h" />
+    <ClInclude Include="src\Node.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="root\temp.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

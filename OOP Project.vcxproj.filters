@@ -21,32 +21,32 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Node.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Folder.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Node.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Folder.cpp">
+    <ClCompile Include="src\CommandManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="CommandManager.cpp">
+    <ClCompile Include="src\Folder.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Node.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="temp.txt">
+    <ClInclude Include="src\CommandManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Folder.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Node.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="root\temp.txt">
       <Filter>root</Filter>
     </Text>
   </ItemGroup>
