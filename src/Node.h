@@ -14,7 +14,8 @@ public:
 	void setName(string n);
 
 	virtual void Open() = 0;
-	virtual void Display() = 0;
+	virtual void Remove() = 0;
+	virtual string getType() = 0;
 
 	virtual~Node();
 };

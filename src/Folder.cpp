@@ -1,6 +1,6 @@
 #include "Folder.h"
 
-Folder::Folder(string name, Node* parent) :Node(name, parent)
+Folder::Folder(string name, Node* parent) :Node(name, parent), count(0)
 {
 	size = 5;
 	count = 0;
@@ -20,19 +20,15 @@ void Folder::addNode(Node* node)
 		for (int i = 0;i < size;i++)
 		{
 			temp[i] = nullptr;
-		}
-		for (int i = 0;i < count;i++)
-		{
 			temp[i] = children[i];
 		}
 		delete[] children;
 		children = temp;
 	}
-
 	children[count++] = node;
 }
 
-Node* Folder::find(string name)
+Node* Folder::findchild(string name)
 {
 	for (int i = 0;i < count;i++)
 	{
@@ -65,19 +61,40 @@ void Folder::list()
 	{
 		if (children[i] != nullptr)
 		{
-			children[i]->Display();
+			cout << children[i]->getType() << "\t" << children[i]->getName() << endl;
+		}
+	}
+}
+
+void Folder::searchRecursive(string target, string path)
+{
+	string current = path + "/" + name;
+	for (int i = 0;i < count;i++)
+	{
+		if (children[i]->getName() == target)
+		{
+			cout << "Path: " << current << "/" << target << endl;
+		}
+		if (children[i]->getType() == "Folder")
+		{
+			static_cast<Folder*>(children[i])->searchRecursive(target, current);
 		}
 	}
 }
 
 void Folder::Open()
 {
-	cout << "Folder Opened: " << name<<endl;
+	cout << "Folder " << name<<" opened."<<endl;
 }
 
-void Folder::Display()
+void Folder::Remove()
 {
-	cout << "[Folder]" << name << endl;
+	cout << "Folder " << name << " removed." << endl;
+}
+
+string Folder::getType()
+{
+	return "Folder";
 }
 
 Folder::~Folder()

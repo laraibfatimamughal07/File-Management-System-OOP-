@@ -10,11 +10,15 @@ public:
 
 	void addNode(Node* node);
 	void removeNode(string name);
-	Node* find(string name);
+	Node* findchild(string name);
+	void searchRecursive(string target, string path);
 
 	void list();
 	void Open() override;
-	void Display() override;
+	string getType() override;
+	void Remove() override;
+
+	int getCount();
 
 	~Folder();
 };

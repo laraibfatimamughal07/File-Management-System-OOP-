@@ -2,9 +2,7 @@
 #include"src/Folder.h"
 #include"src/CommandManager.h"
 #include"src/Node.h"
-
 using namespace std;
-
 int main()
 {
 	cout << "Program testing!\n";
