@@ -15,7 +15,7 @@ public:
 	//deleted
 
 	Node* findchild(string name) const;
-	bool search(string target, string path);
+	bool searchNode(string target, string path);
 
 	void list() const;
 	void Open() override;

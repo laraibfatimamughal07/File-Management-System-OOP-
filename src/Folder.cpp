@@ -42,7 +42,7 @@ void Folder::list() const
 	}
 }
 
-bool Folder::search(string target, string path)
+bool Folder::searchNode(string target, string path)
 {
 	string current = path + "/" + name;
 	for (Node* child : children)
@@ -57,7 +57,7 @@ bool Folder::search(string target, string path)
 		if (child->isFolder())
 		{
 			Folder* f = static_cast<Folder*>(child);
-			if (f->search(target, current))
+			if (f->searchNode(target, current))
 				return true;
 		}
 	}

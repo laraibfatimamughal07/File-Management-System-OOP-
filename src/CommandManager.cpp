@@ -1,80 +1,117 @@
-//#include"CommandManager.h"
-//#include<string>
-//commandManager::commandManager(Folder* root)
-//{
-//	current = root;
-//}
-//void commandManager::run()
-//{
-//	string in;
-//	int l = 0;
-//	while (in[l] != '\0')
-//		l++;
-//	for (int i = 0;i < l;i++)
-//	{
-//		cout << "\n>";
-//		getline(cin, in);
-//		if (in == "exist")
-//			break;
-//		Execute(in);
-//	}
-//}
-//void commandManager::Execute(string cmd)
-//{
-//	int position = cmd.find(' ');
-//	string command="";
-//	string arg="";
-//	int i = 0;
-//	while (i < cmd.length() && cmd[i] != ' ')
-//	{
-//		command += cmd[i];
-//		i++;
-//	}
-//	i++;
-//	while (i < cmd.length())
-//	{
-//		arg += cmd[i];
-//		i++;
-//	}
-//	if (command == "is")
-//	{
-//		current->list(); //CHECK THIS 
-//	}
-//	else if (command == "mkdir")
-//	{
-//		if (arg == "")
-//		{
-//			cout << "Enter Folder Name\n";
-//			return;
-//		}
-//		if (current->findchild(arg) != nullptr)
-//		{
-//			cout << "Name already exists\n";
-//		}
-//		Folder* newFolder = new Folder(arg, current);
-//		current->addNode(newFolder);
-//	}
-//	else if (command == "cd")
-//	{
-//		if (arg == "..")
-//		{
-//			if (current->getParent() != nullptr)
-//			{
-//				current = (Folder*)current->getParent();
-//			}
-//			return;
-//		}
-//		Node* found = current->findchild(arg);
-//		if (found == nullptr)
-//		{
-//			cout << "Not found\n";
-//			return;
-//		}
-//		Folder* f = (Folder*)found;
-//		current = f;
-//	}
-//	else
-//	{
-//		cout << "Invalid Command\n";
-//	}
-//}
+#include"CommandManager.h"
+#include"Folder.h"
+
+commandManager::commandManager(Folder* root)
+{
+	this->root = root;
+	this->current = current;
+}
+
+void commandManager::Execute(string command)
+{
+	//all the commands are directed and managed here
+	string cmd = "";
+	string arg1 = "";
+	string arg2 = "";
+	int i = 0;
+	while (i < command.length() && command[i] != ' ')
+	{
+		cmd += command[i];
+		i++;
+	}
+	i++;
+	while (i < command.length() && command[i] != ' ')
+	{
+		arg1 += command[i];
+		i++;
+	}
+	i++;
+	while (i < command.length() && command[i] != ' ')
+	{
+		arg2 += command[i];
+		i++;
+	}
+	if (cmd == "ls")
+	{
+		ls();
+	}
+	else if (cmd == "mkdir")
+	{
+		mkdir(arg1);
+	}
+	else if (cmd == "touch")
+	{
+		touch(arg1, arg2);
+	}
+	else if (cmd == "cd")
+	{
+		cd(arg1);
+	}
+	else if (cmd == "rm")
+	{
+		rm(arg1);
+	}
+	else if (cmd == "rename")
+	{
+		renameNode(arg1);
+	}
+	else
+	{
+		cout << "Invalid command!\n";
+	}
+}
+
+void commandManager::ls()
+{
+	current->list();
+}
+
+void commandManager::mkdir(string n)
+{
+	Folder* newFolder = new Folder(n, current);
+	current->addNode(newFolder);
+}
+void commandManager::rm(string n)
+{
+
+}
+
+void commandManager::touch(string t, string n)
+{
+	/*File* newFile = new TextFile(n, current);
+	current->addNode(newFile);*/
+}
+void commandManager::cd(string n)
+{
+	//to chanage the current directory
+	if (n == "..")
+	{
+		if (current->getParent() != nullptr)
+		{
+			current = static_cast<Folder*>(current->getParent());
+			cout << "[CURRENT DIRECTORY] " << current->getName() << endl;
+		}
+		return;
+	}
+	Node* node = current->findchild(n);
+	if (node != nullptr && node->isFolder())
+	{
+		current = static_cast<Folder*>(node);
+	}
+	else
+	{
+		cout << "Folder not Found!\n";
+	}
+}
+void commandManager::renameNode(string newName)
+{
+	
+}
+void commandManager::search(string n)
+{
+	bool found = current->searchNode(n, current->getName());
+	if (!found)
+	{
+		cout << "<" <<n<< "> not found" << endl;
+	}
+}
