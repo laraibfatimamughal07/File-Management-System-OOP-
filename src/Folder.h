@@ -1,24 +1,27 @@
 #pragma once
 #include "Node.h"
+#include<vector>
 
 class Folder: public Node {
-	Node** children;
-	int size;
-	int count;
+	vector<Node*>children;
 public:
 	Folder(string name, Node* parent);
 
 	void addNode(Node* node);
 	void removeNode(string name);
-	Node* findchild(string name);
-	void searchRecursive(string target, string path);
 
-	void list();
+	//opened
+	//created
+	//deleted
+
+	Node* findchild(string name) const;
+	void search(string target, string path);
+
+	void list() const;
 	void Open() override;
-	string getType() override;
+	
 	void Remove() override;
-
-	int getCount();
+	bool isFolder() override;
 
 	~Folder();
 };

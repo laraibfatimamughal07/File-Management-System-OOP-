@@ -92,7 +92,7 @@ void Folder::Remove()
 	cout << "Folder " << name << " removed." << endl;
 }
 
-string Folder::getType()
+
 {
 	return "Folder";
 }

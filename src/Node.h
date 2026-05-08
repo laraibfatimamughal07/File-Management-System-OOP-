@@ -9,13 +9,17 @@ protected:
 public:
 	Node(string name, Node* parent);
 		
-	string getName();
-	Node* getParent();
+	string getName()const ;
+	Node* getParent() const;
 	void setName(string n);
 
 	virtual void Open() = 0;
 	virtual void Remove() = 0;
-	virtual string getType() = 0;
+	virtual bool isFolder() = 0;
+
+	//created
+	//opened
+	//deleted
 
 	virtual~Node();
 };
