@@ -36,6 +36,21 @@
     <ClCompile Include="src\File.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="TxtFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="PrivateFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ZipFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CommandManager.h">

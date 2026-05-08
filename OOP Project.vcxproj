@@ -19,11 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioFile.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PrivateFile.cpp" />
     <ClCompile Include="src\CommandManager.cpp" />
     <ClCompile Include="src\File.cpp" />
     <ClCompile Include="src\Folder.cpp" />
     <ClCompile Include="src\Node.cpp" />
+    <ClCompile Include="TxtFile.cpp" />
+    <ClCompile Include="ZipFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AudioFile.h" />
