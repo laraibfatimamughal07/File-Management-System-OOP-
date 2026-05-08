@@ -15,11 +15,10 @@ public:
 	//deleted
 
 	Node* findchild(string name) const;
-	void search(string target, string path);
+	bool search(string target, string path);
 
 	void list() const;
 	void Open() override;
-	
 	void Remove() override;
 	bool isFolder() override;
 

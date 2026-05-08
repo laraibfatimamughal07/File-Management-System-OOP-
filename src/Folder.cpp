@@ -1,107 +1,89 @@
 #include "Folder.h"
 
-Folder::Folder(string name, Node* parent) :Node(name, parent), count(0)
+Folder::Folder(string name, Node* parent) :Node(name, parent)
 {
-	size = 5;
-	count = 0;
-	children = new Node * [size];
-	for (int i = 0;i < size;i++)
-	{
-		children[i] = nullptr;
-	}
+	
 }
 
 void Folder::addNode(Node* node)
 {
-	if (count == size)
-	{
-		size *= 2;
-		Node** temp = new Node * [size];
-		for (int i = 0;i < size;i++)
-		{
-			temp[i] = nullptr;
-			temp[i] = children[i];
-		}
-		delete[] children;
-		children = temp;
-	}
-	children[count++] = node;
+	children.push_back(node);
 }
 
-Node* Folder::findchild(string name)
+Node* Folder::findchild(string name) const
 {
-	for (int i = 0;i < count;i++)
+	for (Node* child : children)
 	{
-		if (children[i]->getName() == name)
-			return children[i];
+		if (child->getName() == name)
+			return child;
 	}
 	return nullptr;
 }
 
 void Folder::removeNode(string name)
 {
-	for (int i = 0;i < count;i++)
+	for (int i = 0;i < children.size();i++)
 	{
 		if (children[i]->getName() == name)
 		{
 			delete children[i];
-			for (int j = i;j < count-1;j++)
-			{
-				children[j] = children[j + 1];
-			}
-			count--;
+			children.erase(children.begin() + i);
+			break;
 		}
 	}
-	cout << "Node not Found!\n";
 }
 
-void Folder::list()
+void Folder::list() const
 {
-	for (int i = 0;i < count;i++)
+	cout << "[CONTENTS OF " << name << " ]" << endl;
+	for (Node* child : children)
 	{
-		if (children[i] != nullptr)
-		{
-			cout << children[i]->getType() << "\t" << children[i]->getName() << endl;
-		}
+		cout << "-" << child->getName() << endl;
 	}
 }
 
-void Folder::searchRecursive(string target, string path)
+bool Folder::search(string target, string path)
 {
 	string current = path + "/" + name;
-	for (int i = 0;i < count;i++)
+	for (Node* child : children)
 	{
-		if (children[i]->getName() == target)
+		if (child->getName() == target)
 		{
+			cout << "[FOUND]" << endl;
+			cout << "Name: " << target << endl;
 			cout << "Path: " << current << "/" << target << endl;
+			return true;
 		}
-		if (children[i]->getType() == "Folder")
+		if (child->isFolder())
 		{
-			static_cast<Folder*>(children[i])->searchRecursive(target, current);
+			Folder* f = static_cast<Folder*>(child);
+			if (f->search(target, current))
+				return true;
 		}
 	}
+	return false;
 }
 
 void Folder::Open()
 {
-	cout << "Folder " << name<<" opened."<<endl;
+	cout << "[OPENED] " << name << endl;
+	list();
 }
 
 void Folder::Remove()
 {
-	cout << "Folder " << name << " removed." << endl;
+	cout << "[DELETED] Folder: " << name << endl;
 }
 
-
+bool Folder::isFolder()
 {
-	return "Folder";
+	return true;
 }
 
 Folder::~Folder()
 {
-	for (int i = 0;i < count;i++)
+	for (Node* child : children)
 	{
-		delete children[i];
+		delete child;
 	}
-	delete[] children;
 }
