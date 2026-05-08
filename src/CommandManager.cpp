@@ -4,7 +4,7 @@
 commandManager::commandManager(Folder* root)
 {
 	this->root = root;
-	this->current = current;
+	this->current = root;
 }
 
 void commandManager::Execute(string command)
@@ -19,13 +19,19 @@ void commandManager::Execute(string command)
 		cmd += command[i];
 		i++;
 	}
-	i++;
+	if (i < command.length())
+	{
+		i++;
+	}
 	while (i < command.length() && command[i] != ' ')
 	{
 		arg1 += command[i];
 		i++;
 	}
-	i++;
+	if (i < command.length())
+	{
+		i++;
+	}
 	while (i < command.length() && command[i] != ' ')
 	{
 		arg2 += command[i];
@@ -51,6 +57,10 @@ void commandManager::Execute(string command)
 	{
 		rm(arg1);
 	}
+	else if (cmd == "search")
+	{
+		search(arg1);
+	}
 	else if (cmd == "rename")
 	{
 		renameNode(arg1);
@@ -68,12 +78,17 @@ void commandManager::ls()
 
 void commandManager::mkdir(string n)
 {
+	if (current->findchild(n) != nullptr)
+	{
+		cout<<"Node already exists!\n";
+		return;
+	}
 	Folder* newFolder = new Folder(n, current);
 	current->addNode(newFolder);
 }
 void commandManager::rm(string n)
 {
-
+	current->removeNode(n);
 }
 
 void commandManager::touch(string t, string n)
@@ -83,7 +98,7 @@ void commandManager::touch(string t, string n)
 }
 void commandManager::cd(string n)
 {
-	//to chanage the current directory
+	//to change the current directory
 	if (n == "..")
 	{
 		if (current->getParent() != nullptr)
@@ -97,6 +112,7 @@ void commandManager::cd(string n)
 	if (node != nullptr && node->isFolder())
 	{
 		current = static_cast<Folder*>(node);
+		cout << "[CURRENT DIRECTORY] " << current->getName() << endl;
 	}
 	else
 	{
@@ -105,7 +121,13 @@ void commandManager::cd(string n)
 }
 void commandManager::renameNode(string newName)
 {
-	
+	//if (current->getParent()->findchild(newName) != nullptr)
+	//{
+	//	cout << "Name already exists!\n";
+	//	return;
+	//}
+	current->setName(newName);
+	cout << "[RENAMED] " << current->getName() << endl;
 }
 void commandManager::search(string n)
 {
