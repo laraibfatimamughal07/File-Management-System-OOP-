@@ -50,6 +50,18 @@
     <ClInclude Include="src\File.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\AudioFile.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PrivateFile.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TxtFile.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ZipFile.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="root\temp.txt">

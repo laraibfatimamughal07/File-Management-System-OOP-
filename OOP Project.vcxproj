@@ -26,10 +26,14 @@
     <ClCompile Include="src\Node.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AudioFile.h" />
     <ClInclude Include="src\CommandManager.h" />
     <ClInclude Include="src\File.h" />
     <ClInclude Include="src\Folder.h" />
     <ClInclude Include="src\Node.h" />
+    <ClInclude Include="src\PrivateFile.h" />
+    <ClInclude Include="src\TxtFile.h" />
+    <ClInclude Include="src\ZipFile.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="root\temp.txt" />
