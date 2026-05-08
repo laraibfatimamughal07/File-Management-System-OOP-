@@ -19,15 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AudioFile.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PrivateFile.cpp" />
+    <ClCompile Include="src\AudioFile.cpp" />
     <ClCompile Include="src\CommandManager.cpp" />
     <ClCompile Include="src\File.cpp" />
     <ClCompile Include="src\Folder.cpp" />
     <ClCompile Include="src\Node.cpp" />
+    <ClCompile Include="src\PrivateFile.cpp" />
+    <ClCompile Include="src\TxtFile.cpp" />
     <ClCompile Include="src\ZipFile.cpp" />
-    <ClCompile Include="TxtFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AudioFile.h" />

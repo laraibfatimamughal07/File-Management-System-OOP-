@@ -6,4 +6,5 @@ public:
 
 	void Open() override;
 	void Remove() override;
+	virtual ~AudioFile();
 };

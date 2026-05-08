@@ -36,16 +36,16 @@
     <ClCompile Include="src\File.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="TxtFile.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioFile.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="PrivateFile.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\ZipFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AudioFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PrivateFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TxtFile.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
