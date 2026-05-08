@@ -2,7 +2,7 @@
 #include"AudioFile.h"
 AudioFile::AudioFile(string name, Node* parent) :File(name + ".mp3", parent)
 {
-	cout << "[RECORDINF STARTED]" << endl;
+	cout << "[RECORDING STARTED]" << endl;
 	//
 	cout << "[RECORDING ENDED]" << endl;
 }
