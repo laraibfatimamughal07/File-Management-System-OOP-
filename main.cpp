@@ -1,20 +1,26 @@
-#include<iostream>
-#include"src/Folder.h"
-#include"src/CommandManager.h"
+#include <iostream>
+#include<string>
+#include"src/File.h"
 #include"src/Node.h"
+#include "src/Folder.h"
+#include "src/CommandManager.h"
 using namespace std;
 int main()
-{
-	cout << "Program testing!\n";
+{	// create root folder
 	Folder* root = new Folder("root", nullptr);
-	Folder* f1 = new Folder("docs", root);
-	Folder* f2 = new Folder("images", root);
-	root->addNode(f1);
-	root->addNode(f2);
-	cout << "Contents: ";
-	root->list();
+	// command manager
+	commandManager cm(root);
+	string command;
+	cout << "Simple File System Started...\n";
+	while (true)
+	{
+		cout << "\n> ";
+		getline(cin, command);
 
-	delete root;
+		if (command == "exit")
+			break;
 
+		cm.Execute(command);
+	}
 	return 0;
 }
