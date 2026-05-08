@@ -121,13 +121,24 @@ void commandManager::cd(string n)
 }
 void commandManager::renameNode(string newName)
 {
-	//if (current->getParent()->findchild(newName) != nullptr)
-	//{
-	//	cout << "Name already exists!\n";
-	//	return;
-	//}
+	if (current == root)
+	{
+		cout << "Root Folder can not be renamed!" << endl;
+		return;
+	}
+	Node* parent = current->getParent();
+	if (parent != nullptr)
+	{
+		Folder* parentFolder = static_cast<Folder*>(parent);
+		Node* existing = parentFolder->findchild(newName);
+		if (existing != nullptr)
+		{
+			cout << "Name already exixts!" << endl;
+			return;
+		}
+	}
 	current->setName(newName);
-	cout << "[RENAMED] " << current->getName() << endl;
+	cout << "[RENAMED] " << newName << endl;
 }
 void commandManager::search(string n)
 {
