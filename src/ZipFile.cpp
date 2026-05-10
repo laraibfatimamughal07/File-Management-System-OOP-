@@ -1,8 +1,11 @@
 #include "ZipFile.h"
+#include<fstream>
 
 ZipFile::ZipFile(string name, string ext, Node* parent)
     : File(name + "-zip.zip", parent) {
     this->originalExtension = ext;
+	ofstream out(getPath());
+    out.close();
 }
 
 void ZipFile::Open() {

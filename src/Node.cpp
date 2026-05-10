@@ -25,6 +25,13 @@ void Node::setName(string n)
 {
 	name = n;
 }
+string Node::getPath()
+{
+		if (parent == nullptr) {
+		return name; 
+	}
+		return parent->getPath() + "/" + name;
+}
 string Node::getPath() const {
 	if (parent == nullptr) {
 		return name; 

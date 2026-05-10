@@ -16,6 +16,7 @@ public:
 	void setName(string n);
 	virtual string getPath() const;
 
+	string getPath();
 	virtual void Open() = 0;
 	virtual void Remove() = 0;
 	virtual bool isFolder() = 0;

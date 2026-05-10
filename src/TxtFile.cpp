@@ -1,11 +1,23 @@
 //...........
 #include"TxtFile.h"
+#include<fstream>
 TxtFile::TxtFile(string name, Node* parent):File(name+".txt", parent)
 {
 	currentLine = 0;
+	ofstream out(getPath());
+	out.close();
+	cout << "[CREATED] " << getPath() << endl;
 }
 void TxtFile::Open()
 {
+	lines.clear();
+	ifstream in(getPath());
+	string line;
+	while (getline(in, line))
+	{
+		lines.push_back(line);
+	}
+	in.close();
 	cout << "[OPENED] " << name << endl;
 	int choice;
 	do {
@@ -77,8 +89,17 @@ void TxtFile::Open()
 			}
 			break;
 		case 6:
-			cout << "[File CLOSED]" << endl;
+		{
+			ofstream out(getPath());
+			for (string line : lines)
+			{
+				out << line << endl;
+			}
+			out.close();
+			cout << "[FILE SAVED] " << endl;
+			cout << "[FILE CLOSED]" << endl;
 			break;
+		}
 		default:
 			cout << "[INVALID CHOICE]" << endl;
 		}

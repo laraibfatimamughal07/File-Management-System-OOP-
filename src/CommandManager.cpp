@@ -11,6 +11,11 @@ commandManager::commandManager(Folder* root)
 	this->current = root;
 }
 
+Folder* commandManager::getCurrent()
+{
+	return current;
+}
+
 void commandManager::Execute(string command)
 {
 	//all the commands are directed and managed here

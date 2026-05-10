@@ -1,12 +1,16 @@
 #include "PrivateFile.h"
+#include<fstream>
 
 PrivateFile::PrivateFile(string name, Node* parent, string pass)
     : File(name + ".priv", parent) {
     this->passKey = pass;
 	this->currentLine = 0;
+	ofstream out(getPath());
+	out.close();
 }
 
 void PrivateFile::Open() {
+
     string attempt;
     cout << "Enter passkey for " << name << ": ";
     cin >> attempt;
@@ -14,6 +18,14 @@ void PrivateFile::Open() {
 
     if (attempt == passKey) {
         cout << "[ACCESS GRANTED] Opening secure editor..." << endl;
+		lines.clear();
+		ifstream in(getPath());
+		string line;
+		while (getline(in, line))
+		{
+			lines.push_back(line);
+		}
+		in.close();
 		int choice;
 		do {
 			if (lines.empty())
@@ -93,9 +105,18 @@ void PrivateFile::Open() {
 				cin.get();
 				break;
 			case 6:
+			{
+				ofstream out(getPath());
+				for (string line : lines)
+				{
+					out << line << endl;
+				}
+				out.close();
+				cout << "[PRIVATE FILE SAVED]" << endl;
 				cout << "[File CLOSED]" << endl;
 				cin.clear();
 				break;
+			}
 			default:
 				cout << "[INVALID CHOICE]" << endl;
 			}

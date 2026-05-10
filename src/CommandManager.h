@@ -6,6 +6,7 @@ class commandManager {
 public:
 	commandManager(Folder* root);
 	void Execute(string command);
+	Folder* getCurrent();
 
 	void ls();
 	void mkdir(string name);
