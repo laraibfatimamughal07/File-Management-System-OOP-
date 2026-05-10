@@ -111,19 +111,23 @@ void commandManager::rm(string n)
 
 void commandManager::touch(string t, string n)
 {
-	if (current->findchild(n) != nullptr) {
+	if (current->findchild(n) != nullptr) 
+	{
 		cout << "Error: Name already exists!" << endl;
 		return;
 	}
 
 	Node* newFile = nullptr;
-	if (t == "txt") {
+	if (t == "txt") 
+	{
 		newFile = new TxtFile(n, current);
 	}
-	else if (t == "audio") {
+	else if (t == "audio") 
+	{
 		newFile = new AudioFile(n, current);
 	}
-	else if (t == "priv") {
+	else if (t == "priv") 
+	{
 		string pass;
 		cout << "Set passkey for private file: ";
 		cin >> pass;
@@ -195,7 +199,8 @@ void commandManager::search(string n)
 
 void commandManager::openNode(string name) {
 	Node* target = current->findchild(name);
-	if (target != nullptr) {
+	if (target != nullptr) 
+	{
 		target->Open(); // This triggers polymorphism (Txt vs Audio vs Folder)
 	}
 	else {
@@ -205,7 +210,8 @@ void commandManager::openNode(string name) {
 
 void commandManager::zipNode(string name) {
 	Node* target = current->findchild(name);
-	if (!target) {
+	if (!target)
+	{
 		cout << "Node not found!" << endl;
 		return;
 	}
@@ -216,5 +222,6 @@ void commandManager::zipNode(string name) {
 
 	// According to many implementations, we might remove the original or just add the zip
 	current->addNode(z);
-	cout << "[ZIPPED] " << name << " into " << name << "-zip.zip" << endl;
+
+	cout << "[ZIPPED] " << name << " created in " << current->getName() << "-zip.zip" << endl;
 }

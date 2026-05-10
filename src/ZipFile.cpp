@@ -4,8 +4,13 @@
 ZipFile::ZipFile(string name, string ext, Node* parent)
     : File(name + "-zip.zip", parent) {
     this->originalExtension = ext;
-	ofstream out(getPath());
-    out.close();
+	ofstream out(this->getPath());
+    if (out.is_open())
+    {
+        out << "This is a zipped file:" << endl;
+		out.close();
+        cout << "[ZIP FILE OPENED] " << getPath() << endl;
+    }
 }
 
 void ZipFile::Open() {
