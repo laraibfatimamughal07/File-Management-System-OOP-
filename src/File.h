@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
 #include<vector>
+
 class File:public Node {
 protected:
 	vector<string>lines;

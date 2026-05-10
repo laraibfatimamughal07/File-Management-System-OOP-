@@ -14,4 +14,6 @@ public:
 	void search(string name);
 	void rm(string name);
 	void renameNode(string newName);
+	void openNode(string name);
+	void zipNode(string name);
 };

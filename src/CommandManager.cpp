@@ -1,5 +1,9 @@
 #include"CommandManager.h"
 #include"Folder.h"
+#include "TxtFile.h"
+#include "AudioFile.h"
+#include "PrivateFile.h"
+#include "ZipFile.h"
 
 commandManager::commandManager(Folder* root)
 {
@@ -13,7 +17,7 @@ void commandManager::Execute(string command)
 	string cmd = "";
 	string arg1 = "";
 	string arg2 = "";
-	int i = 0;
+	size_t i = 0;
 	while (i < command.length() && command[i] != ' ')
 	{
 		cmd += command[i];
@@ -65,6 +69,14 @@ void commandManager::Execute(string command)
 	{
 		renameNode(arg1);
 	}
+	else if (cmd == "zip")
+	{
+		zipNode(arg1);
+	}
+	else if (cmd == "open") 
+	{ 
+		openNode(arg1); 
+	}
 	else
 	{
 		cout << "Invalid command!\n";
@@ -86,6 +98,7 @@ void commandManager::mkdir(string n)
 	Folder* newFolder = new Folder(n, current);
 	current->addNode(newFolder);
 }
+
 void commandManager::rm(string n)
 {
 	current->removeNode(n);
@@ -93,9 +106,33 @@ void commandManager::rm(string n)
 
 void commandManager::touch(string t, string n)
 {
-	/*File* newFile = new TextFile(n, current);
-	current->addNode(newFile);*/
+	if (current->findchild(n) != nullptr) {
+		cout << "Error: Name already exists!" << endl;
+		return;
+	}
+
+	Node* newFile = nullptr;
+	if (t == "txt") {
+		newFile = new TxtFile(n, current);
+	}
+	else if (t == "audio") {
+		newFile = new AudioFile(n, current);
+	}
+	else if (t == "priv") {
+		string pass;
+		cout << "Set passkey for private file: ";
+		cin >> pass;
+		cin.ignore(1000, '\n');
+		newFile = new PrivateFile(n, current, pass);
+	}
+	else {
+		cout << "Unknown file type: " << t << endl;
+		return;
+	}
+
+	if (newFile) current->addNode(newFile);
 }
+
 void commandManager::cd(string n)
 {
 	//to change the current directory
@@ -119,6 +156,7 @@ void commandManager::cd(string n)
 		cout << "Folder not Found!\n";
 	}
 }
+
 void commandManager::renameNode(string newName)
 {
 	if (current == root)
@@ -140,6 +178,7 @@ void commandManager::renameNode(string newName)
 	current->setName(newName);
 	cout << "[RENAMED] " << newName << endl;
 }
+
 void commandManager::search(string n)
 {
 	bool found = current->searchNode(n, current->getName());
@@ -147,4 +186,30 @@ void commandManager::search(string n)
 	{
 		cout << "<" <<n<< "> not found" << endl;
 	}
+}
+
+void commandManager::openNode(string name) {
+	Node* target = current->findchild(name);
+	if (target != nullptr) {
+		target->Open(); // This triggers polymorphism (Txt vs Audio vs Folder)
+	}
+	else {
+		cout << "Node not found!" << endl;
+	}
+}
+
+void commandManager::zipNode(string name) {
+	Node* target = current->findchild(name);
+	if (!target) {
+		cout << "Node not found!" << endl;
+		return;
+	}
+
+	// Create the zip file (assuming ZipFile is built to take extension/name)
+	string ext = target->isFolder() ? "/" : ".file";
+	ZipFile* z = new ZipFile(name, ext, current);
+
+	// According to many implementations, we might remove the original or just add the zip
+	current->addNode(z);
+	cout << "[ZIPPED] " << name << " into " << name << "-zip.zip" << endl;
 }
