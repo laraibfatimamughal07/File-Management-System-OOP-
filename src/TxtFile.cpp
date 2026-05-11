@@ -1,10 +1,11 @@
-//...........
 #include"TxtFile.h"
 #include<fstream>
+
 TxtFile::TxtFile(string name, Node* parent):File(name+".txt", parent)
 {
 	currentLine = 0;
-	ofstream out(getPath());
+
+	ofstream out(getPath());	//File Handling
 	out.close();
 	cout << "[CREATED] " << getPath() << endl;
 }
@@ -17,7 +18,8 @@ void TxtFile::Open()
 	{
 		lines.push_back(line);
 	}
-	in.close();
+	in.close();		//Data of File Copied
+
 	cout << "[OPENED] " << name << endl;
 	int choice;
 	do {
@@ -27,10 +29,10 @@ void TxtFile::Open()
 		}
 		else
 		{
-			cout << "Line " << currentLine + 1 << "/" << lines.size() << ":";
+			cout << "[LINE] " << currentLine + 1 << "/" << lines.size() << ":";
 			cout << lines.at(currentLine) << endl;
 		}
-		cout << "Commands: " << endl;
+		cout << "Commands: \n";
 		cout << "1. Move Up\n";
 		cout << "2. Move Down\n";
 		cout << "3. Add New Line\n";
@@ -45,13 +47,13 @@ void TxtFile::Open()
 		{
 		case 1:
 			if (currentLine > 0)
-				currentLine--;
+				currentLine--;	//1 line up
 			else
 				cout << "Already at First line.\n";
 			break;
 		case 2:
 			if (!lines.empty() && currentLine < lines.size() - 1)
-				currentLine++;
+				currentLine++;		//1 line down
 			else
 				cout << "Already at last line.\n";
 			break;

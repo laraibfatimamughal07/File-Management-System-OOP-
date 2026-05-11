@@ -11,18 +11,17 @@ protected:
 public:
 	Node(string name, Node* parent);
 		
-	string getName()const ;
+	string getName() const;
 	Node* getParent() const;
 	void setName(string n);
-	virtual string getPath() const;
 
-	string getPath();
-	virtual void Open() = 0;
-	virtual void Remove() = 0;
-	virtual bool isFolder() = 0;
-	
-	//created
+	virtual string getPath() const;
+	virtual void Open() = 0;	//To open a Node
+	virtual void Remove() = 0;		//To remove
+	virtual bool isFolder() = 0;		//to see if the child Node is Folder or File
+
 	//opened
+	//created
 	//deleted
 
 	virtual~Node();

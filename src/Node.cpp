@@ -7,10 +7,10 @@ Node::Node(string name, Node* parent)
 }
 
 Node::~Node() {
-	// if we delete[] parent,deleting it here can
-	//1. crash program
-	//2. double delete memory
-	//3. corrupt tree structure
+	//if we delete[] parent,deleting it here can cause
+	//crash program
+	//double delete memory
+	//corrupt tree structure
 }
 
 string Node::getName() const
@@ -25,16 +25,11 @@ void Node::setName(string n)
 {
 	name = n;
 }
-string Node::getPath()
+string Node::getPath() const
 {
-		if (parent == nullptr) {
+	if (parent == nullptr) 
+	{
 		return name; 
 	}
-		return parent->getPath() + "/" + name;
-}
-string Node::getPath() const {
-	if (parent == nullptr) {
-		return name; 
-	}
-	return parent->getPath() + "/" + name;
+	return parent->getPath() + "/" + name;		//Path Direction
 }

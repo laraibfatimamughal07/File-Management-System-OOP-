@@ -2,21 +2,24 @@
 #include<fstream>
 
 PrivateFile::PrivateFile(string name, Node* parent, string pass)
-    : File(name + ".priv", parent) {
+    : File(name + ".priv", parent)
+{
     this->passKey = pass;
 	this->currentLine = 0;
 	ofstream out(getPath());
 	out.close();
 }
 
-void PrivateFile::Open() {
+void PrivateFile::Open()
+{
 
     string attempt;
     cout << "Enter passkey for " << name << ": ";
     cin >> attempt;
     cin.ignore(1000, '\n');
 
-    if (attempt == passKey) {
+    if (attempt == passKey)
+	{
         cout << "[ACCESS GRANTED] Opening secure editor..." << endl;
 		lines.clear();
 		ifstream in(getPath());
@@ -128,17 +131,20 @@ void PrivateFile::Open() {
     }
 }
 
-void PrivateFile::Remove() {
+void PrivateFile::Remove()
+{
     string attempt;
     cout << "Enter passkey to confirm deletion of private file: ";
     cin >> attempt;
     cin.ignore(1000, '\n');
 
-    if (attempt == passKey) {
+    if (attempt == passKey)
+	{
         cout << "Are you sure you want to delete this private file? (y/n): ";
         char confirm;
         cin >> confirm;
-        if (confirm == 'y' || confirm == 'Y') {
+        if (confirm == 'y' || confirm == 'Y') 
+		{
             cout << "[DELETED] Secure file " << name << " destroyed." << endl;
         }
     }
