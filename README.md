@@ -57,7 +57,7 @@ OOP project/
 │   ├── ZipFile.h / .cpp
 │   └── CommandManager.h / .cpp
 └── root/           ← the simulated "C: drive" — also where actual real files get saved
-```
+
 
 
 Quick reference — file type behavior summary
