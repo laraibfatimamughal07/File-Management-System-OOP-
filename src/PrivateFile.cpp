@@ -54,7 +54,8 @@ void PrivateFile::Open()
 			cout << "6. Close File\n";
 			cout << "Enter Your Choice: ";
 			cin >> choice;
-			while (!cin) {
+			while (!cin) 
+			{
 				cout << "Please enter an integer!!!" << endl;
 				cout << "Please enter a valid  choice (1-6): ";
 				cin.clear();
