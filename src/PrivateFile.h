@@ -1,5 +1,6 @@
 #pragma once
 #include"File.h"
+
 class PrivateFile :public File {
 	string passKey;
 public:
@@ -7,4 +8,5 @@ public:
 
 	void Open() override;
 	void Remove() override;
+	~PrivateFile();
 };

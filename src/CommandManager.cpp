@@ -23,12 +23,10 @@ void commandManager::Execute(string command)	//All the commands are directed and
 	//touch <type> <name>
 
 	string cmd = "";	//touch
-	string arg1 = "";	//type
-	string arg2 = "";	//name
+	string cmd1 = "";	//type
+	string cmd2 = "";	//name
 
-	//size_t i = 0;
 	int i = 0;
-
 	while (i < command.length() && command[i] != ' ')
 	{
 		cmd += command[i];	//Take first part of commmand
@@ -40,7 +38,7 @@ void commandManager::Execute(string command)	//All the commands are directed and
 	}
 	while (i < command.length() && command[i] != ' ')
 	{
-		arg1 += command[i];		//Take second part of Command
+		cmd1 += command[i];		//Take second part of Command
 		i++;
 	}
 	if (i < command.length())
@@ -49,7 +47,7 @@ void commandManager::Execute(string command)	//All the commands are directed and
 	}
 	while (i < command.length() && command[i] != ' ')
 	{
-		arg2 += command[i];		//Take third part of command
+		cmd2 += command[i];		//Take third part of command
 		i++;
 	}
 
@@ -59,35 +57,35 @@ void commandManager::Execute(string command)	//All the commands are directed and
 	}
 	else if (cmd == "mkdir")
 	{
-		mkdir(arg1);	//mkdir <name>
+		mkdir(cmd1);	//mkdir <name>
 	}
 	else if (cmd == "touch")
 	{
-		touch(arg1, arg2);	//touch <type> <name>
+		touch(cmd1, cmd2);	//touch <type> <name>
 	}
 	else if (cmd == "cd")
 	{
-		cd(arg1);	//cd <name>
+		cd(cmd1);	//cd <name>
 	}
 	else if (cmd == "rm")
 	{
-		rm(arg1);	//rm <name>
+		rm(cmd1);	//rm <name>
 	}
 	else if (cmd == "search")
 	{
-		search(arg1);	//search <name>
+		search(cmd1);	//search <name>
 	}
 	else if (cmd == "rename")
 	{
-		renameNode(arg1);	//removeNode <name>
+		renameNode(cmd1);	//removeNode <name>
 	}
 	else if (cmd == "zip")
 	{
-		zipNode(arg1);	//zip <name.type>
+		zipNode(cmd1);	//zip <name.type>
 	}
 	else if (cmd == "open") 
 	{ 
-		openNode(arg1);		//openNode <name>
+		openNode(cmd1);		//openNode <name>
 	}
 	else
 	{
@@ -108,48 +106,53 @@ void commandManager::mkdir(string n)
 		return;
 	}
 	Folder* newFolder = new Folder(n, current);
-	current->addNode(newFolder);	//made a new directory
+	current->addNode(newFolder);			//made a new directory
 }
 
 void commandManager::rm(string n)
 {
-	current->removeNode(n);		//removed directory
+	current->removeNode(n);					//removed directory
 }
 
 void commandManager::touch(string t, string n)
 {
-	if (current->findchild(n) != nullptr) 
+	if (current->findchild(n) != nullptr)
 	{
 		cout << "[NODE ALREADY EXISTS!]" << endl;
 		return;
 	}
 
 	Node* newFile = nullptr;
-	if (t == "txt") 
+	if (t == "txt")
 	{
 		newFile = new TxtFile(n, current);
 	}
-	else if (t == "audio") 
+	else if (t == "audio")
 	{
 		newFile = new AudioFile(n, current);
 	}
-	else if (t == "priv") 
+	else if (t == "priv")
 	{
 		string pass;
 		cout << "[SET PASSKEY]: ";
 		cin >> pass;
+
 		cin.ignore(1000, '\n');
+
 		newFile = new PrivateFile(n, current, pass);
 	}
-	else {
-		cout << "Unknown file type: " << t << endl;
+	else
+	{
+		cout << "[UNKNOWN FILE TYPE] " << t << endl;
 		return;
 	}
-
-	if (newFile) current->addNode(newFile);		//New File created
+	if (newFile)
+	{
+		current->addNode(newFile);			//New File created
+	}
 }
 
-void commandManager::cd(string n)		//to change the current directory
+void commandManager::cd(string n)			//to change the current directory
 {
 	if (n == "..")
 	{
@@ -160,6 +163,7 @@ void commandManager::cd(string n)		//to change the current directory
 		}
 		return;
 	}
+
 	Node* node = current->findchild(n);
 	if (node != nullptr && node->isFolder())
 	{
@@ -199,7 +203,7 @@ void commandManager::search(string n)
 	bool found = current->searchNode(n, current->getName());
 	if (!found)
 	{
-		cout << "<" <<n<< "> not found" << endl;
+		cout <<n<< " not found" << endl;
 	}
 }
 
@@ -208,7 +212,7 @@ void commandManager::openNode(string name)
 	Node* target = current->findchild(name);
 	if (target != nullptr) 
 	{
-		target->Open(); // This triggers polymorphism (Txt vs Audio vs Folder)
+		target->Open();							// This triggers polymorphism (Txt vs Audio vs Folder)
 	}
 	else {
 		cout << "[NODE NOT FOUND]" << endl;

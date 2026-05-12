@@ -8,11 +8,11 @@ PrivateFile::PrivateFile(string name, Node* parent, string pass)
 	this->currentLine = 0;
 	ofstream out(getPath());
 	out.close();
+	cout << "[PRIVATE FILE CREATED]" << endl;
 }
 
 void PrivateFile::Open()
 {
-
     string attempt;
     cout << "Enter passkey for " << name << ": ";
     cin >> attempt;
@@ -23,6 +23,11 @@ void PrivateFile::Open()
         cout << "[ACCESS GRANTED] Opening secure editor..." << endl;
 		lines.clear();
 		ifstream in(getPath());
+		if (!in)
+		{
+			cout << "[CAN NOT OPEN FILE]";
+			return;
+		}
 		string line;
 		while (getline(in, line))
 		{
@@ -48,14 +53,15 @@ void PrivateFile::Open()
 			cout << "5. View All Content\n";
 			cout << "6. Close File\n";
 			cout << "Enter Your Choice: ";
-
-			if (!(cin >> choice)) {
+			cin >> choice;
+			while (!cin) {
+				cout << "Please enter an integer!!!" << endl;
+				cout << "Please enter a valid  choice (1-6): ";
 				cin.clear();
-				cin.ignore(1000, '\n');
-				cout << "[INVALID INPUT] Enter a number.\n";
-				continue;
+				cin.ignore(numeric_limits<int>::max(), '\n');
+				cin >> choice;
 			}
-			cin.ignore(1000, '\n');
+			cin.ignore();
 
 			string newLine;
 			switch (choice)
@@ -125,9 +131,9 @@ void PrivateFile::Open()
 			}
 		} while (choice != 6);
     }
-    else {
+    else 
+	{
         cout << "[ACCESS DENIED] Incorrect passkey!" << endl;
-  
     }
 }
 
@@ -143,6 +149,8 @@ void PrivateFile::Remove()
         cout << "Are you sure you want to delete this private file? (y/n): ";
         char confirm;
         cin >> confirm;
+		cin.ignore();
+
         if (confirm == 'y' || confirm == 'Y') 
 		{
 			string cmd = "del \"" + getPath() + "\"";
@@ -150,8 +158,22 @@ void PrivateFile::Remove()
 
             cout << "[DELETED SECURE FILE] " << name << " destroyed." << endl;
         }
+		else if (confirm == 'n' || confirm == 'N')
+		{
+			cout << "[Okay, FILE WILL NOT BE DELETED]" << endl;
+			return;
+		}
+		else
+		{
+			cout << "Invalid Input!" << endl;
+			return;
+		}
     }
     else {
         cout << "Wrong passkey. Deletion aborted." << endl;
     }
+}
+PrivateFile::~PrivateFile()
+{
+
 }

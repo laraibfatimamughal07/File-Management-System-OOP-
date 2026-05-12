@@ -15,11 +15,11 @@ public:
 	Node* getParent() const;
 	void setName(string n);
 
-	virtual void renameDisk(string newName);
-	virtual string getPath() const;
-	virtual void Open() = 0;	//To open a Node
-	virtual void Remove() = 0;		//To remove
-	virtual bool isFolder() = 0;		//to see if the child Node is Folder or File
+	virtual void renameDisk(string newName);		//To rename File/Folder on Disk
+	virtual string getPath() const;					//To get the path of Node
+	virtual void Open() = 0;						//To open a Node
+	virtual void Remove() = 0;						//To remove
+	virtual bool isFolder() = 0;					//to see if the child Node is Folder or File
 
 	//opened
 	//created

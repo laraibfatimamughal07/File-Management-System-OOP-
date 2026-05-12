@@ -8,20 +8,17 @@
 using namespace std;
 
 int main()
-{	// create root folder
-	system("mkdir root >nul 2>nul"); // Create a physical root directory on disk
+{	
+	system("mkdir root >nul 2>nul");						// Create a physical root directory on disk
 	Folder* root = new Folder("root", nullptr);
-	// command manager
+	
 	commandManager cm(root);
 	string command;
-	cout << "Simple File System Started...\n";
 	while (true)
 	{
-		cout << "\n["
-			<< cm.getCurrent()->getName()
-			<< "]>";
-		getline(cin, command);
+		cout << "["<< cm.getCurrent()->getName() << "]>";
 
+		getline(cin, command);
 		if (command == "exit")
 			break;
 

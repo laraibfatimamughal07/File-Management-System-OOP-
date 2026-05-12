@@ -5,20 +5,27 @@ TxtFile::TxtFile(string name, Node* parent):File(name+".txt", parent)
 {
 	currentLine = 0;
 
-	ofstream out(getPath());	//File Handling
+	ofstream out(getPath());				//File Handling
 	out.close();
 	cout << "[CREATED] " << getPath() << endl;
 }
 void TxtFile::Open()
 {
 	lines.clear();
+
 	ifstream in(getPath());
+	if (!in)
+	{
+		cout << "[UNABLE TO OPEN FILE]" << endl;
+		return;
+	}
 	string line;
+
 	while (getline(in, line))
 	{
 		lines.push_back(line);
 	}
-	in.close();		//Data of File Copied
+	in.close();								//Data of File Copied
 
 	cout << "[OPENED] " << name << endl;
 	int choice;
@@ -41,19 +48,27 @@ void TxtFile::Open()
 		cout << "6. Close File\n";
 		cout << "Enter Your Choice: ";
 		cin >> choice;
+		while (!cin) {
+			cout << "Please enter an integer!!!" << endl;
+			cout << "Please enter a valid  choice (1-6): ";
+			cin.clear();
+			cin.ignore(numeric_limits<int>::max(), '\n');
+			cin >> choice;
+		}
 		cin.ignore();
+
 		string newLine;
 		switch (choice)
 		{
 		case 1:
 			if (currentLine > 0)
-				currentLine--;	//1 line up
+				currentLine--;				//1 line up
 			else
 				cout << "Already at First line.\n";
 			break;
 		case 2:
 			if (!lines.empty() && currentLine < lines.size() - 1)
-				currentLine++;		//1 line down
+				currentLine++;				//1 line down
 			else
 				cout << "Already at last line.\n";
 			break;
@@ -86,7 +101,7 @@ void TxtFile::Open()
 			{
 				for (int i = 0;i < lines.size();i++)
 				{
-					cout << i + 1 << ". " << lines.at(i) << endl;
+					cout << i + 1 << ": " << lines.at(i) << endl;
 				}
 			}
 			break;
@@ -98,8 +113,7 @@ void TxtFile::Open()
 				out << line << endl;
 			}
 			out.close();
-			cout << "[FILE SAVED] " << endl;
-			cout << "[FILE CLOSED]" << endl;
+			cout << "[FILE SAVED] [FILE CLOSED]" << endl;
 			break;
 		}
 		default:

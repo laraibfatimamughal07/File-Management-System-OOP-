@@ -6,8 +6,9 @@ class commandManager {
 
 public:
 	commandManager(Folder* root);
-	void Execute(string command);	//central Function of CommandManager to Execute all the commands
-	Folder* getCurrent();	//Function to get Current Folder
+
+	void Execute(string command);		//central Function of CommandManager to Execute all the commands
+	Folder* getCurrent();				//Function to get Current Folder
 
 	void ls();
 	void mkdir(string name);

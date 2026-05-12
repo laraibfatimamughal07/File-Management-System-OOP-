@@ -7,4 +7,6 @@ public:
 
 	void Open() override;
 	void Remove() override;
+
+	~ZipFile();
 };

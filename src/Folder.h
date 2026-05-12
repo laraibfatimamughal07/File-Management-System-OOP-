@@ -8,14 +8,14 @@ class Folder: public Node {
 public:
 	Folder(string name, Node* parent);
 
-	void addNode(Node* node);
-	void removeNode(string name);
+	void addNode(Node* node);						//To add a node
+	void removeNode(string name);					//to remove a node
 
-	Node* findchild(string name) const;
-	bool searchNode(string target, string path);
+	Node* findchild(string name) const;				//to find a chile(for path's purpose)
+	bool searchNode(string target, string path);	//to search a node(file/ folder in memory)
 
-	void list() const;
-	void Open() override;
+	void list() const;								//To list all the contents of a Folder
+	void Open() override;							//overrided from Node
 	void Remove() override;
 	bool isFolder() override;
 

@@ -4,19 +4,19 @@
 Folder::Folder(string name, Node* parent) :Node(name, parent)
 {
 	string cmd = "mkdir \"" + getPath() + "\"";
-	system(cmd.c_str());
-	if (parent != nullptr)
+	system(cmd.c_str()); 
+	if (parent != nullptr)    
 	{
 		cout << "[FOLDER CREATED] " << name << endl;
 	}
 }
 
-void Folder::addNode(Node* node) //Function to add Node
+void Folder::addNode(Node* node)			//Function to add Node
 {
-	children.push_back(node);
+	children.push_back(node);				//stores address and address-> object
 }
 
-Node* Folder::findchild(string name) const //Function to Find Child of Node (abstract) class
+Node* Folder::findchild(string name) const	//Function to Find Child of Node (abstract) class
 {
 	for (Node* child : children)
 	{
@@ -26,7 +26,7 @@ Node* Folder::findchild(string name) const //Function to Find Child of Node (abs
 	return nullptr;
 }
 
-void Folder::removeNode(string name)	//Function to remove Node
+void Folder::removeNode(string name)		//Function to remove Node
 {
 	for (int i = 0;i < children.size();i++)
 	{
@@ -40,7 +40,7 @@ void Folder::removeNode(string name)	//Function to remove Node
 	}
 }
 
-void Folder::list() const	//Function to list all the Contents (childs) of a Folder
+void Folder::list() const					//Function to list all the Contents (childs) of a Folder
 {
 	cout << "[CONTENTS] "<<name << endl;
 	for (Node* child : children)
