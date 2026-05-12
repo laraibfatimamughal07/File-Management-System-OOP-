@@ -23,7 +23,7 @@ string Node::getPath() const
 	{
 		return name;						
 	}
-	return parent->getPath() + "\\" + name;		//For Example: docs\text.txt
+	return parent->getPath() + "\\" + name;				//For Example: docs\text.txt
 }
 void Node::renameDisk(string newName)
 {

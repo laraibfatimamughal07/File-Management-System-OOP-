@@ -1,8 +1,7 @@
 #include "PrivateFile.h"
 #include<fstream>
 
-PrivateFile::PrivateFile(string name, Node* parent, string pass)
-    : File(name + ".priv", parent)
+PrivateFile::PrivateFile(string name, Node* parent, string pass) : File(name + ".priv", parent)
 {
     this->passKey = pass;
 	this->currentLine = 0;

@@ -1,7 +1,8 @@
 #include "AudioFile.h"
 #include <cstdlib>                                              // Needed for system()
 
-AudioFile::AudioFile(string name, Node* parent) : File(name + ".mp3", parent) {
+AudioFile::AudioFile(string name, Node* parent) : File(name + ".mp3", parent) 
+{
     if (this->name.find(".mp3") == string::npos)
     {
         this->name += ".mp3";
@@ -15,13 +16,15 @@ AudioFile::AudioFile(string name, Node* parent) : File(name + ".mp3", parent) {
     cout << "[RECORDING ENDED]" << endl;
 }
 
-void AudioFile::Open() {
+void AudioFile::Open()
+{
     cout << "[PLAYING AUDIO FILE] " << name << endl;
     string cmd = "start " + getPath();                       // 'start' works on Windows to play file in default player
     system(cmd.c_str());
 }
 
-void AudioFile::Remove() {
+void AudioFile::Remove() 
+{
     string cmd = "del \"" + getPath()+"\"";                   // Physically delete the mp3 from disk
     system(cmd.c_str());
     cout << "[DELETED AUDIO FILE] " << name << endl;

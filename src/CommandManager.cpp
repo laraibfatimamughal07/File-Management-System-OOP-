@@ -12,12 +12,12 @@ commandManager::commandManager(Folder* root)
 	this->current = root;
 }
 
-Folder* commandManager::getCurrent()	//Return current Folder
+Folder* commandManager::getCurrent()				//Return current Folder
 {
 	return current;
 }
 
-void commandManager::Execute(string command)	//All the commands are directed and managed here
+void commandManager::Execute(string command)		//All the commands are directed and managed here
 {
 	//biggest command in this program is 
 	//touch <type> <name>
@@ -29,63 +29,63 @@ void commandManager::Execute(string command)	//All the commands are directed and
 	int i = 0;
 	while (i < command.length() && command[i] != ' ')
 	{
-		cmd += command[i];	//Take first part of commmand
+		cmd += command[i];							//Take first part of commmand
 		i++;
 	}
 	if (i < command.length())
 	{
-		i++;	//skip space
+		i++;										//skip space
 	}
 	while (i < command.length() && command[i] != ' ')
 	{
-		cmd1 += command[i];		//Take second part of Command
+		cmd1 += command[i];							//Take second part of Command
 		i++;
 	}
 	if (i < command.length())
 	{
-		i++;	//skip next space
+		i++;										//skip next space
 	}
 	while (i < command.length() && command[i] != ' ')
 	{
-		cmd2 += command[i];		//Take third part of command
+		cmd2 += command[i];							//Take third part of command
 		i++;
 	}
 
 	if (cmd == "ls")
 	{
-		ls(); //ls
+		ls();										 //ls
 	}
 	else if (cmd == "mkdir")
 	{
-		mkdir(cmd1);	//mkdir <name>
+		mkdir(cmd1);								//mkdir <name>
 	}
 	else if (cmd == "touch")
 	{
-		touch(cmd1, cmd2);	//touch <type> <name>
+		touch(cmd1, cmd2);							//touch <type> <name>
 	}
 	else if (cmd == "cd")
 	{
-		cd(cmd1);	//cd <name>
+		cd(cmd1);									//cd <name>
 	}
 	else if (cmd == "rm")
 	{
-		rm(cmd1);	//rm <name>
+		rm(cmd1);									//rm <name>
 	}
 	else if (cmd == "search")
 	{
-		search(cmd1);	//search <name>
+		search(cmd1);								//search <name>
 	}
 	else if (cmd == "rename")
 	{
-		renameNode(cmd1);	//removeNode <name>
+		renameNode(cmd1);							//removeNode <name>
 	}
 	else if (cmd == "zip")
 	{
-		zipNode(cmd1);	//zip <name.type>
+		zipNode(cmd1);								//zip <name.type>
 	}
 	else if (cmd == "open") 
 	{ 
-		openNode(cmd1);		//openNode <name>
+		openNode(cmd1);								//openNode <name>
 	}
 	else
 	{
@@ -106,12 +106,12 @@ void commandManager::mkdir(string n)
 		return;
 	}
 	Folder* newFolder = new Folder(n, current);
-	current->addNode(newFolder);			//made a new directory
+	current->addNode(newFolder);				//made a new directory
 }
 
 void commandManager::rm(string n)
 {
-	current->removeNode(n);					//removed directory
+	current->removeNode(n);						//removed directory
 }
 
 void commandManager::touch(string t, string n)
@@ -164,7 +164,7 @@ void commandManager::cd(string n)			//to change the current directory
 		return;
 	}
 
-	Node* node = current->findchild(n);
+	Node* node = current->findchild(n);			
 	if (node != nullptr && node->isFolder())
 	{
 		current = static_cast<Folder*>(node);
@@ -212,7 +212,7 @@ void commandManager::openNode(string name)
 	Node* target = current->findchild(name);
 	if (target != nullptr) 
 	{
-		target->Open();							// This triggers polymorphism (Txt vs Audio vs Folder)
+		target->Open();								// This triggers polymorphism (Txt vs Audio vs Folder)
 	}
 	else {
 		cout << "[NODE NOT FOUND]" << endl;
@@ -228,9 +228,6 @@ void commandManager::zipNode(string name)
 		return;
 	}
 
-	// Create the zip file (assuming ZipFile is built to take extension/name)
-	//string ext = target->isFolder() ? "/" : ".file";
-
 	string ext="";
 	if (target->isFolder())
 	{
@@ -241,8 +238,6 @@ void commandManager::zipNode(string name)
 		ext = ".file";
 	}
 	ZipFile* z = new ZipFile(name, ext, current);
-
-	// According to many implementations, we might remove the original or just add the zip
 	current->addNode(z);
 
 	cout << "[ZIPPED] " << name << " created in " << current->getName() << "-zip.zip" << endl;
