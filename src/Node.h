@@ -15,6 +15,7 @@ public:
 	Node* getParent() const;
 	void setName(string n);
 
+	virtual void renameDisk(string newName);
 	virtual string getPath() const;
 	virtual void Open() = 0;	//To open a Node
 	virtual void Remove() = 0;		//To remove

@@ -5,13 +5,11 @@
 #include "src/Folder.h"
 #include "src/CommandManager.h"
 
-
 using namespace std;
-
 
 int main()
 {	// create root folder
-	system("mkdir root"); // Create a physical root directory on disk
+	system("mkdir root >nul 2>nul"); // Create a physical root directory on disk
 	Folder* root = new Folder("root", nullptr);
 	// command manager
 	commandManager cm(root);
@@ -21,8 +19,7 @@ int main()
 	{
 		cout << "\n["
 			<< cm.getCurrent()->getName()
-			<< "]> ";
-		cout << "\n> ";
+			<< "]>";
 		getline(cin, command);
 
 		if (command == "exit")

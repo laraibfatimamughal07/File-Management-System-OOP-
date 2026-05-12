@@ -1,8 +1,14 @@
 #include "Folder.h"
+#include<cstdlib> // to create mkdir on disk
 
 Folder::Folder(string name, Node* parent) :Node(name, parent)
 {
-	
+	string cmd = "mkdir \"" + getPath() + "\"";
+	system(cmd.c_str());
+	if (parent != nullptr)
+	{
+		cout << "[FOLDER CREATED] " << name << endl;
+	}
 }
 
 void Folder::addNode(Node* node) //Function to add Node
@@ -26,6 +32,7 @@ void Folder::removeNode(string name)	//Function to remove Node
 	{
 		if (children[i]->getName() == name)
 		{
+			children[i]->Remove();
 			delete children[i];
 			children.erase(children.begin() + i);
 			break;
@@ -73,7 +80,9 @@ void Folder::Open()		//Functio to Open Folder
 
 void Folder::Remove()	//Function to Remove Folder
 {
-	cout << "[DELETED] Folder: " << name << endl;
+	string cmd = "rmdir /s /q \"" + getPath() + "\"";
+	system(cmd.c_str());
+	cout << "[FOLDER DELETED] " << name << endl;
 }
 
 bool Folder::isFolder()		//Function returns yrue if the object formed is a Folder

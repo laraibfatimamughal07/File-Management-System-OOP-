@@ -180,17 +180,17 @@ void commandManager::renameNode(string newName)
 		return;
 	}
 	Node* parent = current->getParent();
+
 	if (parent != nullptr)
 	{
 		Folder* parentFolder = static_cast<Folder*>(parent);
-		Node* existing = parentFolder->findchild(newName);
-		if (existing != nullptr)
+		if (parentFolder->findchild(newName))
 		{
-			cout << "Name already exixts!" << endl;
+			cout << "[NAME ALREADY EXISTS]" << endl;
 			return;
 		}
 	}
-	current->setName(newName);
+	current->renameDisk(newName);
 	cout << "[RENAMED] " << newName << endl;
 }
 

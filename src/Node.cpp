@@ -31,5 +31,18 @@ string Node::getPath() const
 	{
 		return name; 
 	}
-	return parent->getPath() + "/" + name;		//Path Direction
+	return parent->getPath() + "\\" + name;		//Path Direction
+}
+void Node::renameDisk(string newName)
+{
+	string oldPath = getPath();
+	string parentPath = "";
+	if (parent != nullptr)
+	{
+		parentPath = parent->getPath() + "/";
+	}
+	string newPath = parentPath + newName;
+	string cmd = "[RENAMED] \"" + oldPath + "\" \"" + newName + "\"";
+	system(cmd.c_str());
+	name = newName;
 }

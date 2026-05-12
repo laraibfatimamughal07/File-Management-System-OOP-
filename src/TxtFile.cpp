@@ -109,7 +109,9 @@ void TxtFile::Open()
 }
 void TxtFile::Remove()
 {
-	cout << "[FILE] " << name << " deleted permanently\n";
+	string cmd = "del \"" + getPath() + "\"";
+	system(cmd.c_str());
+	cout << "[TXT FILE DELETED] " << name << endl;
 }
 TxtFile::~TxtFile()
 {

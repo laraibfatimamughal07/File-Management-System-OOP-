@@ -145,7 +145,10 @@ void PrivateFile::Remove()
         cin >> confirm;
         if (confirm == 'y' || confirm == 'Y') 
 		{
-            cout << "[DELETED] Secure file " << name << " destroyed." << endl;
+			string cmd = "del \"" + getPath() + "\"";
+			system(cmd.c_str());
+
+            cout << "[DELETED SECURE FILE] " << name << " destroyed." << endl;
         }
     }
     else {

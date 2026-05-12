@@ -22,9 +22,9 @@ void AudioFile::Open() {
 }
 
 void AudioFile::Remove() {
-    string cmd = "del " + getPath();     // Physically delete the mp3 from disk
+    string cmd = "del \"" + getPath()+"\"";     // Physically delete the mp3 from disk
     system(cmd.c_str());
-    cout << "[REMOVED AUDIO FILE] " << name << endl;
+    cout << "[DELETED AUDIO FILE] " << name << endl;
 }
 
 AudioFile::~AudioFile()
