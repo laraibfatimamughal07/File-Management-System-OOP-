@@ -60,7 +60,7 @@ OOP project/
 ```
 
 
-## Quick reference — file type behavior summary
+Quick reference — file type behavior summary
 
 | Type | Extension | On Create | On Open | On Delete |
 
