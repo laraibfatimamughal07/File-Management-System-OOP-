@@ -9,6 +9,7 @@ AudioFile::AudioFile(string name, Node* parent) : File(name + ".mp3", parent)
     }
     cout << "[RECORDING STARTED - 5 SECONDS]" << endl;
 
+    //string mic = "Microphone Array (Intel® Smart Sound Technology for Digital Microphones)";
     string mic = "Internal Microphone (Conexant ISST Audio)";
     string cmd = "ffmpeg -y -f dshow -i audio=\"" + mic + "\" -t 5 \"" + getPath() + "\"";
 
