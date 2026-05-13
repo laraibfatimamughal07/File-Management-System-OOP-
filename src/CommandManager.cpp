@@ -116,9 +116,24 @@ void commandManager::rm(string n)
 
 void commandManager::touch(string t, string n)
 {
-	if (current->findchild(n) != nullptr)
+	string fullName = n;
+
+	if (t == "txt")
 	{
-		cout << "[NODE ALREADY EXISTS!]" << endl;
+		fullName += ".txt";
+	}
+	else if (t == "audio")
+	{
+		fullName += ".mp3";
+	}
+	else if (t == "priv")
+	{
+		fullName += ".priv";
+	}
+
+	if (current->findchild(fullName) != nullptr)
+	{
+		cout << "[FILE ALREADY EXISTS!]" << endl;
 		return;
 	}
 
@@ -219,7 +234,7 @@ void commandManager::openNode(string name)
 	}
 }
 
-void commandManager::zipNode(string name) 
+void commandManager::zipNode(string name)
 {
 	Node* target = current->findchild(name);
 	if (!target)
@@ -228,7 +243,13 @@ void commandManager::zipNode(string name)
 		return;
 	}
 
-	string ext="";
+	string zipName = name + "-zip.zip";
+	if (current->findchild(zipName) != nullptr)
+	{
+		cout << "[ZIP FILE ALREADY EXISTS]" << endl;
+		return;
+	}
+	string ext = "";
 	if (target->isFolder())
 	{
 		ext = "/";
@@ -239,6 +260,5 @@ void commandManager::zipNode(string name)
 	}
 	ZipFile* z = new ZipFile(name, ext, current);
 	current->addNode(z);
-
-	cout << "[ZIPPED] " << name << " created in " << current->getName() << "-zip.zip" << endl;
+	cout << "[ZIPPED] " << zipName << endl;
 }
